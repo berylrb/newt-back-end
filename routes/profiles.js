@@ -10,5 +10,6 @@ router.get('/', profilesCtrl.index)
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
+router.post('/', checkAuth, profilesCtrl.createUserActivity)
 
 export { router }
