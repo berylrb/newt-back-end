@@ -10,6 +10,7 @@ router.get('/', profilesCtrl.index)
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
-router.post('/', checkAuth, profilesCtrl.createUserActivity)
+router.post('/:id/userActivities', checkAuth, profilesCtrl.create)
+router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 
 export { router }
