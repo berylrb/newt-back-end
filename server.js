@@ -7,6 +7,7 @@ import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
 
 import './config/database.js'
+import formData from 'express-form-data'
 
 const app = express()
 
@@ -24,5 +25,6 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.status(err.status || 500).json({ err: err.message })
 })
+app.use(formData.parse())
 
 export { app }
