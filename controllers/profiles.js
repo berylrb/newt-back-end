@@ -10,15 +10,6 @@ function index(req, res) {
   })
 }
 
-function show(req,res){
-  Profile.findById(req.body.user)
-  .then(profile => res.json(profile._id))
-  .catch((err) => {
-    console.log(err)
-    res.status(500).json(err)
-  })
-}
-
 function create(req, res){
   req.body.owner = req.user.profile
   createUserActivity.create(req.body)
@@ -56,7 +47,6 @@ function addPhoto(req, res) {
 
 export { 
   index,
-  show,
   create,
   addPhoto,
 }
