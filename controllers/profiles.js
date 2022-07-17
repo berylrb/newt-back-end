@@ -23,12 +23,12 @@ function show(req, res) {
 
 function create(req, res){
   req.body.owner = req.user.profile
-  createUserActivity.create(req.body)
-  .then(userActivity => {
-    userActivity.findById(userActivity._id)
-    .populate('owner')
-    .then(populatedUserActivity => {
-      res.json(populatedUserActivity)
+  Profile.findById(req.params.id)
+  .then(profile => {
+    profile.userActivity.push(req.body)
+    profile.save()
+    .then(() =>{
+      res.json(profile)
     })
   })
   .catch(err => {
