@@ -11,7 +11,7 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  Profile.findById({})
+  Profile.findById(req.params.id)
   .then(profile => {
     res.json(profile)
   })
@@ -36,6 +36,20 @@ function create(req, res){
     res.status(500).json({err: err.errmsg})
   })
 }
+
+// function indexUserActivity(req, res){
+//   req.body.owner = req.user.profile
+//   Profile.findById(req.params.id)
+//   .then(profile => {
+//     profile.userActivity(activity => {
+//       res.json(activity)
+//     })
+//   })
+//   .catch(err => {
+//     console.log(err)
+//     res.status(500).json({err: err.errmsg})
+//   })
+// }
 
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
