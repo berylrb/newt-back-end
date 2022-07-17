@@ -11,7 +11,7 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  Profile.findById(req.params.id)
+  Profile.findById({})
   .then(profile => {
     res.json(profile)
   })
