@@ -14,5 +14,6 @@ router.get('/:id', checkAuth, profilesCtrl.show)
 router.post('/:id/userActivities', checkAuth, profilesCtrl.create)
 // router.get('/', checkAuth, profilesCtrl.index)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
+router.post('/:id/activities', checkAuth, profilesCtrl.add)
 
 export { router }

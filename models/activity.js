@@ -16,7 +16,7 @@ const activitySchema = new mongoose.Schema({
   price: Number,
   participants: Number,
   key: number,
-  extras: [extraSchema]
+  extras: [extraSchema],
 },{
   timestamps: true,
 })

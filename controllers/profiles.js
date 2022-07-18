@@ -37,6 +37,22 @@ function create(req, res){
   })
 }
 
+// --- add activities to profile ---
+function add(req, res) {
+  Profile.findById(req.params.id)
+    .then(profile => {
+      profile.activities.push(req.body)
+      profile.save()
+        .then(updatedApiProfile => res.json(updatedApiProfile))
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({error: err.errmsg})
+    })
+}
+
+
+
 // function indexUserActivity(req, res){
 //   req.body.owner = req.user.profile
 //   Profile.findById(req.params.id)
@@ -107,5 +123,6 @@ export {
   create,
   addPhoto,
   show,
-  deleteOne as delete
+  deleteOne as delete,
+  add
 }
