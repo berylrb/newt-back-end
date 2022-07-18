@@ -14,9 +14,10 @@ const userActivitySchema = new Schema({
 const profileSchema = new mongoose.Schema({
   email: { type: String, required: true, lowercase: true, unique: true },
   name: String,
-  activity: [{type: mongoose.Schema.Types.ObjectId, ref: 'Activity'}],
+  activities: [{ type: Schema.Types.ObjectId, ref: 'Activity' }],
   userActivity: [userActivitySchema],
-  photo: { type: String }
+  photo: { type: String },
+  // apiCollectedActivities: [{ type: Schema.Types.ObjectId, ref: "ApiCollectedActivities" }]
 },{
   timestamps: true,
 })
