@@ -11,6 +11,7 @@ router.get('/', profilesCtrl.index)
 router.use(decodeUserFromToken)
 router.get('/:id', checkAuth, profilesCtrl.show)
 router.post('/:id/userActivities', checkAuth, profilesCtrl.create)
+router.delete('/:id', checkAuth, profilesCtrl.delete)
 // router.get('/', checkAuth, profilesCtrl.index)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 

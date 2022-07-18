@@ -51,6 +51,20 @@ function create(req, res){
 //   })
 // }
 
+function deleteOne(req, res){
+  Profile.findById(req.params.id)
+  .then(profile => {
+    profile.userActivity()
+    .then(deletedUserActivity => {
+      res.json(deletedUserActivity)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  })
+}
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
@@ -75,4 +89,5 @@ export {
   create,
   addPhoto,
   show,
+  deleteOne as delete
 }
