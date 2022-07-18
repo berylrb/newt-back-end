@@ -73,14 +73,14 @@ function deleteOne(req, res) {
 		.then(profile => {
 		profile.userActivity.remove({ _id: req.params.userActivityId })
 		profile.save()
-			.then(() => {
-				res.redirect(`profiles/${profile._id}`)
+			.then(profile => {
+				res.json(profile)
 			})
 		})
-		.catch(error => {
-			console.log(error)
-			res.redirect(`/profiles/${profile._id}`)
-		})
+		.catch(err => {
+      console.log(err)
+      res.status(500).json({err: err.errmsg})
+    })
 	}
 
 function addPhoto(req, res) {
