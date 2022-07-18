@@ -1,4 +1,5 @@
 import { Profile } from '../models/profile.js'
+import { Activity } from '../models/activity.js'
 import { v2 as cloudinary } from 'cloudinary'
 
 function index(req, res) {
@@ -12,6 +13,7 @@ function index(req, res) {
 
 function show(req, res) {
   Profile.findById(req.params.id)
+  .populate('activities')
   .then(profile => {
     res.json(profile)
   })
@@ -38,17 +40,17 @@ function create(req, res){
 }
 
 // --- add activities to profile ---
-function add(req, res) {
-  Profile.findById(req.params.id)
-    .then(profile => {
-      profile.activities.push(req.body)
-      profile.save()
-        .then(updatedApiProfile => res.json(updatedApiProfile))
-    })
-    .catch(error => {
-      console.log(error)
-      res.status(500).json({error: err.errmsg})
-    })
+async function add(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    const activity = await Activity.create(req.body)
+    profile.activities.push(activity)
+    await profile.save()
+    res.json(activity)
+  } catch(err) {
+    console.log(err)
+    res.status(500).json({err: err.errmsg})
+  }
 }
 
 
