@@ -51,6 +51,38 @@ function create(req, res){
 //   })
 // }
 
+// function deleteOne(req, res){
+//   console.log('delete back end')
+//   Profile.findById(req.params.id)
+//   .then(profile => {
+//     profile.userActivity()
+//     .then(deletedUserActivity => {
+//       res.json(deletedUserActivity)
+//     })
+//   })
+
+//   .catch(err => {
+//     console.log(err)
+//     res.status(500).json({err: err.errmsg})
+//   })
+// }
+
+function deleteOne(req, res) {
+  console.log('back end delete')
+	Profile.findById(req.user.profile)
+		.then(profile => {
+		profile.userActivity.remove({ _id: req.params.userActivityId })
+		profile.save()
+			.then(() => {
+				res.redirect(`profiles/${profile._id}`)
+			})
+		})
+		.catch(error => {
+			console.log(error)
+			res.redirect(`/profiles/${profile._id}`)
+		})
+	}
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
@@ -75,4 +107,5 @@ export {
   create,
   addPhoto,
   show,
+  deleteOne as delete
 }
