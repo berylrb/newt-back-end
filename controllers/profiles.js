@@ -101,6 +101,22 @@ function deleteOne(req, res) {
     })
 	}
 
+  function update(req, res) {
+    console.log('back end update')
+    Profile.findById(req.user.profile)
+      .then(profile => {
+      profile.userActivity.update({ _id: req.params.userActivityId })
+      profile.save()
+        .then(profile => {
+          res.json(profile)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json({err: err.errmsg})
+      })
+    }
+
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
@@ -126,5 +142,6 @@ export {
   addPhoto,
   show,
   deleteOne as delete,
-  add
+  add,
+  update
 }
