@@ -102,10 +102,15 @@ function deleteOne(req, res) {
 	}
 
   function update(req, res) {
-    console.log('back end update')
+    console.log('req bodyyy', req.body)
     Profile.findById(req.user.profile)
       .then(profile => {
-      profile.userActivity.update({ _id: req.params.userActivityId })
+      const userActivity = profile.userActivity.id(req.params.userActivityId)
+      console.log('user activity for hunter', userActivity)
+      userActivity.activity = req.body.activity
+      userActivity.type = req.body.type
+      userActivity.price = req.body.price
+      userActivity.participants = req.body.participants
       profile.save()
         .then(profile => {
           res.json(profile)
