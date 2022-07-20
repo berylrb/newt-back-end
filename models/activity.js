@@ -9,6 +9,13 @@ const extraSchema = new Schema({
   timestamps: true
 })
 
+const commentSchema = new Schema({
+  comment: String,
+  author: String
+}, {
+  timestamps: true
+})
+
 const activitySchema = new mongoose.Schema({
   activity: String,
   accessibility: Number,
@@ -16,6 +23,7 @@ const activitySchema = new mongoose.Schema({
   price: Number,
   participants: Number,
   key: Number,
+  comments: [commentSchema],
   extras: [extraSchema],
 },{
   timestamps: true,
