@@ -26,6 +26,7 @@ function show(req, res) {
 function create(req, res){
   req.body.owner = req.user.profile
   Profile.findById(req.params.id)
+  .populate('activities')
   .then(profile => {
     profile.userActivity.push(req.body)
     profile.save()
@@ -39,7 +40,7 @@ function create(req, res){
   })
 }
 
-// --- add activities to profile ---
+// --- add api activities to profile ---
 async function add(req, res) {
   try {
     const profile = await Profile.findById(req.params.id)
@@ -88,6 +89,7 @@ async function add(req, res) {
 function deleteOne(req, res) {
   console.log('back end delete')
 	Profile.findById(req.user.profile)
+  .populate('activities')
 		.then(profile => {
 		profile.userActivity.remove({ _id: req.params.userActivityId })
 		profile.save()
