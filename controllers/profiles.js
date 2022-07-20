@@ -2,6 +2,8 @@ import { Profile } from '../models/profile.js'
 import { Activity } from '../models/activity.js'
 import { v2 as cloudinary } from 'cloudinary'
 
+
+// --- show community page ---
 function index(req, res) {
   Profile.find({})
   .then(profiles => res.json(profiles))
@@ -11,6 +13,8 @@ function index(req, res) {
   })
 }
 
+
+// --- show profile page --- 
 function show(req, res) {
   Profile.findById(req.params.id)
   .populate('activities')
@@ -23,6 +27,7 @@ function show(req, res) {
   })
 }
 
+// --- create userActivity on profile ---
 function create(req, res){
   req.body.owner = req.user.profile
   Profile.findById(req.params.id)
@@ -54,38 +59,7 @@ async function add(req, res) {
   }
 }
 
-
-
-// function indexUserActivity(req, res){
-//   req.body.owner = req.user.profile
-//   Profile.findById(req.params.id)
-//   .then(profile => {
-//     profile.userActivity(activity => {
-//       res.json(activity)
-//     })
-//   })
-//   .catch(err => {
-//     console.log(err)
-//     res.status(500).json({err: err.errmsg})
-//   })
-// }
-
-// function deleteOne(req, res){
-//   console.log('delete back end')
-//   Profile.findById(req.params.id)
-//   .then(profile => {
-//     profile.userActivity()
-//     .then(deletedUserActivity => {
-//       res.json(deletedUserActivity)
-//     })
-//   })
-
-//   .catch(err => {
-//     console.log(err)
-//     res.status(500).json({err: err.errmsg})
-//   })
-// }
-
+// --- delete userActivity from profile ---
 function deleteOne(req, res) {
   console.log('back end delete')
 	Profile.findById(req.user.profile)
@@ -103,6 +77,7 @@ function deleteOne(req, res) {
     })
 	}
 
+  // -- update userActivity from profile ---
   function update(req, res) {
     console.log('req bodyyy', req.body)
     Profile.findById(req.user.profile)
@@ -124,6 +99,30 @@ function deleteOne(req, res) {
       })
     }
 
+
+
+    // -- update api activitiy to include company schema --
+    // function updateWantCompany(req, res) {
+    //   console.log('req body check', req.body)
+    //   Profile.findById(req.user.profile)
+    //     .then(profile => {
+    //       const wantCompany = profile.wantCompany.id(req.params.wantCompanyId)
+    //       console.log('want Company check', wantComapny)
+    //       wantCompany.openToCompany = req.body.openToCompany
+    //       profile.save() 
+    //         .then(profile => {
+    //         res.json(profile)
+    //       })
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //       res.status(500).json({err: err.errmsg})
+    //     })
+    // }
+
+
+
+// --- add photo on sign up ---
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
   Profile.findById(req.params.id)
@@ -150,5 +149,7 @@ export {
   show,
   deleteOne as delete,
   add,
-  update
+  update,
+  // updateWantCompany
 }
+
