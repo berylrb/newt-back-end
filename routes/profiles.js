@@ -13,7 +13,7 @@ router.delete('/userActivity/:userActivityId', checkAuth, profilesCtrl.delete)
 router.get('/:id', checkAuth, profilesCtrl.show)
 router.post('/:id/userActivities', checkAuth, profilesCtrl.create)
 router.put('/:userActivityId', checkAuth, profilesCtrl.update)
-// router.get('/', checkAuth, profilesCtrl.index)
+// router.put('/:wantCompanyId', checkAuth, profilesCtrl.updateWantCompany)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 router.post('/:id/activities', checkAuth, profilesCtrl.add)
 
