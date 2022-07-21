@@ -1,3 +1,3 @@
 # Newt
 
-[GitHub Repository for front end](https://github.com/berylrb/newt-front-end)
+[Newt Front End Repository](https://github.com/berylrb/newt-front-end)
