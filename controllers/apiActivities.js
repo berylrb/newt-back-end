@@ -3,8 +3,10 @@ import { Profile } from '../models/profile.js'
 
 
 function createComment(req, res){
-  Activity.findById(req.params.id)
+  console.log(req.params, 'params')
+  Activity.findById(req.params.activityId)
   .then(activity => {
+    console.log('activity', activity)
     Profile.findById(req.user.profile)
     .then(profile => {
       req.body.author = profile.name
@@ -21,8 +23,11 @@ function createComment(req, res){
 
 
 function findCommentsByKey(req, res){
-  Activity.find({key: req.params.key})
-  .then(activity => res.json(activity))
+  Activity.findOne({key: req.params.key})
+  .then(activity => {
+    // const data = activity[0]
+    res.json(activity)
+  })
   .catch(err => {
     console.log(err)
     res.status(500).json(err)
