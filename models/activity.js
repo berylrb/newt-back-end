@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const extraSchema = new Schema({
-  isFree: Boolean,
-  materialsNeeded: Boolean,
-}, {
-  timestamps: true
-})
+// const extraSchema = new Schema({
+//   isFree: Boolean,
+//   materialsNeeded: Boolean,
+// }, {
+//   timestamps: true
+// })
 
 const commentSchema = new Schema({
   comment: String,
@@ -24,7 +24,7 @@ const activitySchema = new mongoose.Schema({
   participants: Number,
   key: Number,
   comments: [commentSchema],
-  extras: [extraSchema],
+  // extras: [extraSchema],
 },{
   timestamps: true,
 })

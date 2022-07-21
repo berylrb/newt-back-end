@@ -20,6 +20,16 @@ function createComment(req, res){
 }
 
 
+function findCommentsByKey(req, res){
+  Activity.find({key: req.params.key})
+  .then(activity => res.json(activity))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export {
-  createComment
+  createComment,
+  findCommentsByKey
 }
