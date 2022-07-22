@@ -20,7 +20,7 @@ const activitySchema = new mongoose.Schema({
   activity: String,
   accessibility: Number,
   type: String,
-  price: Number,
+  price: String,
   participants: Number,
   key: Number,
   comments: [commentSchema],
