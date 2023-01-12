@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const userActivitySchema = new Schema({
   activity: String,
   type: String,
-  price: Number,
+  price: String,
   participants: Number
 }, {
   timestamps: true
